@@ -3,8 +3,6 @@ package com.mgodevelopment.friends;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import java.net.URI;
-
 /**
  * Created by moa21 on 7/4/2016.
  */

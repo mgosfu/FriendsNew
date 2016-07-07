@@ -63,7 +63,7 @@ public class FriendsListLoader extends AsyncTaskLoader<List<Friend>> {
     @Override
     public void deliverResult(List<Friend> friends) {
 
-        if (isReset()){
+        if (isReset()) {
 
             if (friends != null) {
                 mCursor.close();
@@ -87,5 +87,52 @@ public class FriendsListLoader extends AsyncTaskLoader<List<Friend>> {
             mCursor.close();
         }
 
+    }
+
+    @Override
+    protected void onStartLoading() {
+
+        if (mFriends != null) {
+            deliverResult(mFriends);
+        }
+
+        if (takeContentChanged() || mFriends == null) {
+            forceLoad();
+        }
+
+    }
+
+    @Override
+    protected void onStopLoading() {
+        cancelLoad();
+    }
+
+    @Override
+    protected void onReset() {
+
+        onStopLoading();
+
+        if (mCursor != null) {
+            mCursor.close();
+        }
+
+        mFriends = null;
+
+    }
+
+    @Override
+    public void onCanceled(List<Friend> friends) {
+
+        super.onCanceled(friends);
+
+        if (mCursor != null) {
+            mCursor.close();
+        }
+
+    }
+
+    @Override
+    public void forceLoad() {
+        super.forceLoad();
     }
 }
