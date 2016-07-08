@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Friends</string>
     <string name="action_settings">Settings</string>
+    <string name="main_search_title">Search</string>
+    <string name="main_add_title">Add</string>
+    <string name="main_delete_database_title">Delete Database</string>
+    <string name="addeditName">Full name</string>
+    <string name="addeditPhone">Phone number</string>
+    <string name="addeditEmail">Email address</string>
 </resources>
