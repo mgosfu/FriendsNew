@@ -53,14 +53,9 @@ public class MainActivity extends FragmentActivity {
                 dialog.show(getSupportFragmentManager(), "delete_database");
                 break;
             case R.id.searchRecords:
-                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class):
+                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(searchIntent);
                 break;
-        }
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
