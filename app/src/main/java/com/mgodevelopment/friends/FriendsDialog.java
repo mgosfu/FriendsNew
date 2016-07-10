@@ -40,10 +40,12 @@ public class FriendsDialog extends DialogFragment {
             final int _id = getArguments().getInt(FriendsContract.FriendsColumns.FRIENDS_ID);
             String name = getArguments().getString(FriendsContract.FriendsColumns.FRIENDS_NAME);
             TextView popupMessage = (TextView) view.findViewById(R.id.popup_message);
+
             popupMessage.setText("Are you sure you want to delete " + name + " from your friends list?");
             builder.setView(view).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    //Toast.makeText(getActivity(), "Deleting record: " + _id, Toast.LENGTH_LONG).show();
                     ContentResolver contentResolver = getActivity().getContentResolver();
                     Uri uri = FriendsContract.Friends.buildFriendUri(String.valueOf(_id));
                     contentResolver.delete(uri, null, null);
@@ -51,7 +53,13 @@ public class FriendsDialog extends DialogFragment {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
-            });
+            })
+                    .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
 
         } else if (command.equals(DELETE_DATABASE)) {
 
@@ -61,13 +69,19 @@ public class FriendsDialog extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     ContentResolver contentResolver = getActivity().getContentResolver();
-                    Uri uri = FriendsContract.URI_TABLE;
+                    Uri uri = FriendsContract.BASE_CONTENT_URI;
                     contentResolver.delete(uri, null, null);
                     Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
-            });
+            })
+                    .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
 
         } else if (command.equals(CONFIRM_EXIT)) {
 
@@ -78,7 +92,13 @@ public class FriendsDialog extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     getActivity().finish();
                 }
-            });
+            })
+                    .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
 
         } else {
             Log.d(LOG_TAG, "Invalid command passed as parameter");
